@@ -1,0 +1,43 @@
+START
+
+1. SETUP HTML structure:
+    - Define <!DOCTYPE html>, <html>, <head>, and <body>
+    - Add meta tags for charset and viewport
+    - Title: "Music Player"
+
+2. STYLE with CSS:
+    - Body: gradient background, flex center alignment, full height
+    - Player container: white background, rounded corners, shadow, centered
+    - Header: flex layout, space-between, icon buttons
+    - Cover image: circle, fixed size
+    - Song title & artist name: styled text
+    - Controls: flex layout, buttons for prev/play/next
+    - Progress bar: styled input range
+
+3. HTML content:
+    - Player container:
+        - Header with "back" and "menu" buttons
+        - Cover image with fallback
+        - Song title: "Lover"
+        - Artist name: "Diljit Dosanjh"
+        - Progress bar (range input)
+        - Control buttons: prev, play/pause, next
+        - Audio element (hidden)
+
+4. JAVASCRIPT logic:
+    - GET elements: audio, play button, progress bar
+    - ADD event listener to "play" button:
+        IF audio is paused:
+            - Play audio
+            - Change button to "pause" icon
+        ELSE:
+            - Pause audio
+            - Change button to "play" icon
+    - ADD event listener to audio "timeupdate":
+        - Calculate progress = (currentTime / duration) * 100
+        - Set progress bar value
+    - ADD event listener to progress bar "input":
+        - Calculate seekTime = (progress value / 100) * audio duration
+        - Set audio currentTime to seekTime
+
+END

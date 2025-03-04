@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .player-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            width: 250px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .cover-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .song-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .artist-name {
+            color: gray;
+            margin-bottom: 1.5rem;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+        .control-btn {
+            background: #ff9a9e;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: white;
+        }
+        .progress-bar {
+            width: 100%;
+            margin: 1rem 0;
+            appearance: none;
+            height: 5px;
+            background: #ff9a9e;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <div class="header">
+            <button class="icon-btn" id="back">⬅️</button>
+            <button class="icon-btn" id="menu">☰</button>
+        </div>
+        <img src="Diljit Dosanjh.jpg" alt="cover" class="cover-img" onerror="this.src='fallback.jpg'">
+        <div class="song-title">Lover</div>
+        <div class="artist-name">Diljit Dosanjh</div>
+        <input type="range" class="progress-bar" value="0" max="100">
+        <div class="controls">
+            <button class="control-btn" id="prev">⏪</button>
+            <button class="control-btn" id="play">▶️</button>
+            <button class="control-btn" id="next">⏩</button>
+        </div>
+        <audio id="audio" src="Lover.mp3"></audio>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('play');
+        const progressBar = document.querySelector('.progress-bar');
+
+        // Toggle play/pause
+        playButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playButton.textContent = '⏸️';
+            } else {
+                audio.pause();
+                playButton.textContent = '▶️';
+            }
+        });
+
+        // Update progress bar as audio plays
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.value = progress;
+        });
+
+        // Seek functionality
+        progressBar.addEventListener('input', () => {
+            const seekTime = (progressBar.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+    </script>
+</body>
+</html>
